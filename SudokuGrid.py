@@ -15,6 +15,9 @@ class SudokuGrid:
         for _ in range(9):
             self._grid.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
 
+    def get_cell(self,row, col):
+        return self._grid[row][col]
+
     @staticmethod
     def check_valid_placement(n: int, row: int, col: int, grid: List) -> bool:
         '''Returns if n is already in row, col or in the square containing
