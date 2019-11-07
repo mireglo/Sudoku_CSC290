@@ -203,15 +203,9 @@ class SudokuGrid:
     def change_board(self, n: int, row: int, col: int) -> bool:
         '''Return if move was made successfully
         '''
-<<<<<<< HEAD
-        print(row, col, self.get_cell(row, col))
         if self._grid_display[row][col] == 0:
             self._grid_display[row][col] = n
             self._move_history.append((row, col, n))
-=======
-        if self._grid_display[row][col] == 0:
-            self._grid_display[row][col] = n
->>>>>>> d421c6926aa8316148d9328e1104ad494101e170
             return True
         return False
 
