@@ -14,10 +14,7 @@ class SudokuGrid:
         self._grid_sol = []
         self._grid_display = []
         self._difficulty = 2
-<<<<<<< HEAD
         self._move_history = []
-=======
->>>>>>> d421c6926aa8316148d9328e1104ad494101e170
         for _ in range(9):
             self._grid_sol.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
             self._grid_display.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
