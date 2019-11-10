@@ -13,7 +13,7 @@ class Sudoku:
     # def get_display_grid(self):
     #     return self._grid._grid_display dont do this
 
-    def change_display_grid(self, n, row, col):
+    def fill(self, n, row, col):
         self._grid.change_board(n, row, col)
             #will implement game stop and flash win screen
         return
@@ -26,3 +26,6 @@ class Sudoku:
 
     def game_over(self):
         return self._grid.game_over()
+
+    def undo_fill(self):
+        self._grid.undo()
