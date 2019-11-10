@@ -1,7 +1,7 @@
 import os
 import GridDraw
 from Textbox import*
-from GridAccess import*
+from Sudoku import*
 
 
 class SDKuPGApplication:
@@ -19,13 +19,12 @@ class SDKuPGApplication:
         """ Initializes the game application
         """
         self._rect = pygame.Rect(0, 0, width, height)
-        self._grid = GridAccess()
-        self._grid.new_grid()
+        self._grid = Sudoku()
         pygame.init()
         pygame.display.set_caption("SDKuPG")
         self._screen = pygame.display.set_mode(self._rect.size)
 
-        padding = 22
+        padding = 20
 
         self._text_grid = [[None for _ in range(9)] for _ in range(9)]
         # Create a Textbox for each cell of the grid
@@ -38,24 +37,22 @@ class SDKuPGApplication:
                             (height - 2 * padding) * 1/9)
 
         # Reads the grid model and displays each cell on the screen
-        display_grid = self._grid.get_display_grid()
         for row in range(9):
             for col in range(9):
                 # 0 is seen as an empty space, and the clues
-                if display_grid[row][col] != 0:
-                    self._text_grid[row][col].set_text(display_grid[row][col])
+                if self._grid.get_cell(row, col) != 0:
+                    self._text_grid[row][col].set_text(self._grid.get_cell(row,
+                                                                           col))
                     self._text_grid[row][col].set_editable(False)
 
-    def _restart(self):
+    def _update_screen(self):
         """ Restarts the grid to the initial grid
         """
-        self._grid.restart()
-        display_grid = self._grid.get_display_grid()
-
         for row in range(9):
             for col in range(9):
-                if display_grid[row][col] != 0:
-                    self._text_grid[row][col].set_text(display_grid[row][col])
+                if self._grid.get_cell(row, col) != 0:
+                    self._text_grid[row][col].set_text(self._grid.get_cell(row,
+                                                                           col))
                 else:
                     self._text_grid[row][col].set_text("")
 
@@ -91,7 +88,11 @@ class SDKuPGApplication:
                     if event.key == pygame.K_ESCAPE:
                         running = False
                     if event.key == pygame.K_r:
-                        self._restart()
+                        self._grid.restart()
+                        self._update_screen()
+                    # if event.key == pygame.K_u:
+                    #     self._grid.undo_fill()
+                    #     self._update_screen()
 
                 for row in range(9):
                     for col in range(9):
@@ -99,8 +100,7 @@ class SDKuPGApplication:
                         change = self._text_grid[row][col].get_text()
                         if change == "":
                             change = 0
-                        self._grid.change_display_grid(
-                            row, col, int(change))
+                        self._grid.fill(int(change), row, col)
 
             # --- draws ---
 
