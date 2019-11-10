@@ -12,20 +12,24 @@ class SudokuGrid:
         '''Initializing a SudokuGrid with an empty grid
         '''
         self._grid_sol = []
+        self._grid_init = []
         self._grid_display = []
         self._difficulty = 2
         self._move_history = []
         for _ in range(9):
             self._grid_sol.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
             self._grid_display.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
+            self._grid_init.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
 
     def start_game(self, difficulty):
         if 0 <= difficulty <= 5:
             self._difficulty = difficulty
         self._create_solution()
         for row in range(9):
-            self._grid_display[row] = self._grid_sol[row][:]
+            self._grid_init[row] = self._grid_sol[row][:]
         self._hide_numbers()
+        for row in range(9):
+            self._grid_display[row] = self._grid_init[row][:]
 
     def get_cell(self, row, col):
         return self._grid_display[row][col]
@@ -128,20 +132,20 @@ class SudokuGrid:
             # selecting random cell and rotational counterpart
             row = randint(0, 8)
             col = randint(0, 8)
-            while self._grid_display[row][col] == 0:
+            while self._grid_init[row][col] == 0:
                 row = randint(0, 8)
                 col = randint(0, 8)
 
             # backing up in case removal is gives multiple solutions
-            backupone = self._grid_display[row][col]
-            backuptwo = self._grid_display[8 - row][8 - col]
-            self._grid_display[row][col] = 0
-            self._grid_display[8 - row][8 - col] = 0
+            backupone = self._grid_init[row][col]
+            backuptwo = self._grid_init[8 - row][8 - col]
+            self._grid_init[row][col] = 0
+            self._grid_init[8 - row][8 - col] = 0
 
             # cloning grid to test number of solutions
             test_puzzle = []
             for r in range(0, 9):
-                test_puzzle.append(self._grid_display[r][:])
+                test_puzzle.append(self._grid_init[r][:])
 
             # counter for num solutions is set to 0
             counter = 0
@@ -149,11 +153,10 @@ class SudokuGrid:
             # check num of solutions
             self._solve_puzzle(test_puzzle)
 
-            print(counter)
             # if num of solutions is not one, replace the two blocks
             if counter != 1:
-                self._grid_display[row][col] = backupone
-                self._grid_display[8 - row][8 - col] = backuptwo
+                self._grid_init[row][col] = backupone
+                self._grid_init[8 - row][8 - col] = backuptwo
                 attempts -= 1
 
     def _solve_puzzle(self, test_puzzle) -> bool:
@@ -200,9 +203,10 @@ class SudokuGrid:
     def change_board(self, n: int, row: int, col: int) -> bool:
         '''Return if move was made successfully
         '''
-        if self._grid_display[row][col] == 0:
+        if self._grid_init[row][col] == 0:
+            self._move_history.append((row, col,
+                                       self._grid_display[row][col]))
             self._grid_display[row][col] = n
-            self._move_history.append((row, col, n))
             return True
         return False
 
@@ -220,15 +224,15 @@ class SudokuGrid:
     def reset(self):
         '''Resetting game
         '''
-        move_len = len(self._move_history)
-        for _ in range(move_len):
-            self.undo()
+        for row in range(9):
+            self._grid_display[row] = self._grid_init[row][:]
+
 
     def undo(self):
         if len(self._move_history) == 0:
             return False
         move = self._move_history.pop()
-        self._grid_display[move[0]][move[1]] = 0
+        self._grid_display[move[0]][move[1]] = move[2]
         return True
 
     def __str__(self) -> str:
@@ -249,7 +253,7 @@ class SudokuGrid:
 #         user = input("u for undo, int for row: ")
 #         if user == "u":
 #             sudoku_grid.undo()
-#         if user == "r":
+#         elif user == "r":
 #             sudoku_grid.reset()
 #         else:
 #             row = int(user)
@@ -258,4 +262,3 @@ class SudokuGrid:
 #             sudoku_grid.change_board(n, row, col)
 #
 #         print(sudoku_grid)
-
