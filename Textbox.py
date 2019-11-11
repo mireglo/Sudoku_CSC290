@@ -33,7 +33,7 @@ class Textbox:
         return self._text
 
     def set_editable(self, editable):
-        if isinstance(bool, editable):
+        if isinstance(editable, bool):
             self._editable = editable
 
     def draw(self, screen):
