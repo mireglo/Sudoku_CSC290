@@ -2,7 +2,7 @@
 The purpose of this class is to handle parsing input from the board or any
 screen that requires it
 """
-from GridAccess import*
+from Sudoku import*
 
 class InputHandler:
 
