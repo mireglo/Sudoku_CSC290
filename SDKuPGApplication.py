@@ -14,6 +14,8 @@ class SDKuPGApplication:
         The rectangle the screen is made from
     _screen:
         The game screen
+    _text_grid:
+        A grid that keeps track of each textbox
     """
     def __init__(self, width, height):
         """ Initializes the game application
