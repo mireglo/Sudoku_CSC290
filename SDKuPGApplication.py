@@ -14,6 +14,8 @@ class SDKuPGApplication:
         The rectangle the screen is made from
     _screen:
         The game screen
+    _text_grid:
+        A grid that keeps track of each textbox
     """
     def __init__(self, width, height):
         """ Initializes the game application
@@ -63,9 +65,12 @@ class SDKuPGApplication:
         screen.fill((255, 255, 255))
 
     @staticmethod
-    def _draw_game():
+    def _draw_game(self):
         """ Draws the sudoku game using GridDraw functions
         """
+        for sublist in self._text_grid:
+            for textbox in sublist:
+                textbox.draw(self._screen)
         GridDraw.draw_box()
         GridDraw.draw_grid()
 
@@ -105,10 +110,7 @@ class SDKuPGApplication:
             # --- draws ---
 
             self._draw_background(self._screen)
-            self._draw_game()
-            for sublist in self._text_grid:
-                for textbox in sublist:
-                    textbox.draw(self._screen)
+            self._draw_game(self)
             pygame.display.update()
 
             # --- FPS ---
