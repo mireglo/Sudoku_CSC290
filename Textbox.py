@@ -43,6 +43,8 @@ class Textbox:
         txt_surface = self._font.render(self._text, True, self._colour)
 
         # Blit / add the text to screen
+        if self._active:
+            pygame.draw.rect(screen, (194, 245, 255), self._input_box)
         screen.blit(txt_surface, (self._input_box.x+13, self._input_box.y+2))
 
     def handle_event(self, event):
@@ -91,8 +93,10 @@ class Textbox:
             if self._editable:
                 # Check where the user clicked
                 if self._input_box.collidepoint(event.pos):
-                    if(0 <= (event.pos[0]-40)//40 <= 8 and 0 <= (event.pos[1]-40)//40 <= 8):
-                        Textbox.current_tile = [(event.pos[0]-40)//40,(event.pos[1]-40)//40]
+                    if(0 <= (event.pos[0]-40)//40 <= 8 and 0 <=
+                            (event.pos[1]-40)//40 <= 8):
+                        Textbox.current_tile = [(event.pos[0]-40)//40,
+                                                (event.pos[1]-40)//40]
                     # Toggle the active variable
                     print(Textbox.current_tile)
                     self._active = True
@@ -106,13 +110,13 @@ class Textbox:
                     self._text = self._text[:-1]
                 elif event.key == pygame.K_s and Textbox.current_tile[0] != 8:
                     Textbox.current_tile[0] = Textbox.current_tile[0] + 1
-                #up arrow
+                # up arrow
                 elif event.key == pygame.K_w and Textbox.current_tile[0] != 0:
                     Textbox.current_tile[0] = Textbox.current_tile[0] - 1
-                #right arrow
+                # right arrow
                 elif event.key == pygame.K_d and Textbox.current_tile[1] != 8:
                     Textbox.current_tile[1] = Textbox.current_tile[1] + 1
-                #left arrow
+                # left arrow
                 elif event.key == pygame.K_a and Textbox.current_tile[1] != 0:
                     Textbox.current_tile[1] = Textbox.current_tile[1] - 1
                 else:
