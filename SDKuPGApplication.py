@@ -1,62 +1,27 @@
-import os
+from GameScreen import*
 import GridDraw
-from Textbox import*
-from Sudoku import*
+import sys
 
 
 class SDKuPGApplication:
     """ The SDKuPG game application
 
     === Private Attributes ===
-    _grid:
-        The game of Sudoku
     _rect:
         The rectangle the screen is made from
     _screen:
-        The game screen
-    _text_grid:
-        A grid that keeps track of each textbox
+        Where the visuals are displayed
+    _game_screen:
+        A GameScreen that draws the game
     """
     def __init__(self, width, height):
         """ Initializes the game application
         """
-        self._rect = pygame.Rect(0, 0, width, height)
-        self._grid = Sudoku()
         pygame.init()
         pygame.display.set_caption("SDKuPG")
+        self._rect = pygame.Rect(0, 0, width, height)
         self._screen = pygame.display.set_mode(self._rect.size)
-
-        padding = 20
-
-        self._text_grid = [[None for _ in range(9)] for _ in range(9)]
-        # Create a Textbox for each cell of the grid
-        for row in range(9):
-            for col in range(9):
-                self._text_grid[row][col] = \
-                    Textbox((width - 2 * padding) * col/9 + padding,
-                            (height - 2 * padding) * row/9 + padding,
-                            (width - 2 * padding) * 1/9,
-                            (height - 2 * padding) * 1/9)
-
-        # Reads the grid model and displays each cell on the screen
-        for row in range(9):
-            for col in range(9):
-                # 0 is seen as an empty space, and the clues
-                if self._grid.get_cell(row, col) != 0:
-                    self._text_grid[row][col].set_text(self._grid.get_cell(row,
-                                                                           col))
-                    self._text_grid[row][col].set_editable(False)
-
-    def _update_screen(self):
-        """ Restarts the grid to the initial grid
-        """
-        for row in range(9):
-            for col in range(9):
-                if self._grid.get_cell(row, col) != 0:
-                    self._text_grid[row][col].set_text(self._grid.get_cell(row,
-                                                                           col))
-                else:
-                    self._text_grid[row][col].set_text("")
+        self._game_screen = GameScreen(self._screen)
 
     @staticmethod
     def _draw_background(screen):
@@ -68,9 +33,7 @@ class SDKuPGApplication:
     def _draw_game(self):
         """ Draws the sudoku game using GridDraw functions
         """
-        for sublist in self._text_grid:
-            for textbox in sublist:
-                textbox.draw(self._screen)
+        self._game_screen.draw_grid(self._screen)
         GridDraw.draw_box()
         GridDraw.draw_grid()
 
@@ -92,20 +55,7 @@ class SDKuPGApplication:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         running = False
-                    if event.key == pygame.K_r:
-                        self._grid.restart()
-                        self._update_screen()
-                    # if event.key == pygame.K_u:
-                    #     self._grid.undo_fill()
-                    #     self._update_screen()
-
-                for row in range(9):
-                    for col in range(9):
-                        self._text_grid[row][col].handle_int_event(event)
-                        change = self._text_grid[row][col].get_text()
-                        if change == "":
-                            change = 0
-                        self._grid.fill(int(change), row, col)
+                self._game_screen.handle_game(event)
 
             # --- draws ---
 
@@ -115,10 +65,10 @@ class SDKuPGApplication:
 
             # --- FPS ---
 
-            clock.tick(50)  # 25 Frames Per Seconds
+            clock.tick(50)
 
         pygame.quit()
-        os._exit(0)
+        sys.exit(0)
 
 
 # To check the class works as intended.
