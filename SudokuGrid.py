@@ -7,10 +7,24 @@ counter = 0
 
 
 class SudokuGrid:
+    """ The sudoku board model and related functions for manipulation
+
+    === Private Attributes ===
+    _grid_sol:
+        The solution to the game of sudoku
+    _grid_init:
+        The initial state of the game used for user manipulation logic
+    _grid_display:
+        The current state of the game the user interacts with
+    _difficulty:
+        The variable used for adjusting game difficulty
+    _move_history:
+        List of tuples storing the coordinates of moves and their previous board state
+    """
 
     def __init__(self) -> None:
-        '''Initializing a SudokuGrid with an empty grid
-        '''
+        """Initializing a SudokuGrid with an empty grid
+        """
         self._grid_sol = []
         self._grid_init = []
         self._grid_display = []
@@ -36,9 +50,9 @@ class SudokuGrid:
 
     @staticmethod
     def check_valid_placement(n: int, row: int, col: int, grid: List) -> bool:
-        '''Returns if n is already in row, col or in the square containing
+        """Returns if n is already in row, col or in the square containing
         (row,col).
-        '''
+        """
         if SudokuGrid.in_square(n, row, col, grid) or \
                 SudokuGrid.in_row(n, row, col, grid) or \
                 SudokuGrid.in_col(n, row, col, grid):
@@ -58,8 +72,8 @@ class SudokuGrid:
 
     @staticmethod
     def in_row(n: int, row: int, col: int, grid: List) -> bool:
-        '''Return if n is in row of the grid
-        '''
+        """Return if n is in row of the grid
+        """
         for x in range(9):
             if x != col and n == grid[row][x]:
                 return True
@@ -67,8 +81,8 @@ class SudokuGrid:
 
     @staticmethod
     def in_col(n: int, row: int, col: int, grid: List) -> bool:
-        '''Return if n is in col of the grid
-        '''
+        """Return if n is in col of the grid
+        """
         for x in range(9):
             if x!= row and n == grid[x][col]:
                 return True
@@ -76,8 +90,8 @@ class SudokuGrid:
 
     @staticmethod
     def check_grid(grid: List):
-        '''Return if grid is filled
-        '''
+        """Return if grid is filled
+        """
         for row in range(9):
             for col in range(9):
                 if grid[row][col] == 0:
@@ -85,8 +99,8 @@ class SudokuGrid:
         return True
 
     def _create_solution(self) -> bool:
-        '''Recursively constructs a puzzle solution
-        '''
+        """Recursively constructs a puzzle solution
+        """
         row = 0
         col = 0
         for i in range(81):
@@ -121,8 +135,8 @@ class SudokuGrid:
         return False
 
     def _hide_numbers(self):
-        '''Removes cells while maintaining a unique solution
-        '''
+        """Removes cells while maintaining a unique solution
+        """
         global counter
 
         # num of attempts allow for more blocks to be removed
@@ -160,8 +174,8 @@ class SudokuGrid:
                 attempts -= 1
 
     def _solve_puzzle(self, test_puzzle) -> bool:
-        '''Attempts to solve puzzle using all possible solution combinations
-        '''
+        """Attempts to solve puzzle using all possible solution combinations
+        """
         global counter
         row = 0
         col = 0
@@ -201,8 +215,8 @@ class SudokuGrid:
         return False
 
     def change_board(self, n: int, row: int, col: int) -> bool:
-        '''Return if move was made successfully
-        '''
+        """Return if move was made successfully
+        """
         if self._grid_init[row][col] == 0:
             self._move_history.append((row, col,
                                        self._grid_display[row][col]))
@@ -211,10 +225,10 @@ class SudokuGrid:
         return False
 
     def game_over(self) -> bool:
-        '''Return if board state is a valid solution
+        """Return if board state is a valid solution
 
         PRECONDITION: this is ran if SudokuGrid.check_grid(grid) == True
-        '''
+        """
         for row in range(9):
             for col in range(9):
                 if self._grid_sol[row][col] != self.get_cell(row, col):
@@ -222,8 +236,8 @@ class SudokuGrid:
         return True
 
     def reset(self):
-        '''Resetting game
-        '''
+        """Resetting game
+        """
         for row in range(9):
             self._grid_display[row] = self._grid_init[row][:]
 
@@ -236,8 +250,8 @@ class SudokuGrid:
         return True
 
     def __str__(self) -> str:
-        '''Producing string of matrix for visualization
-        '''
+        """Producing string of matrix for visualization
+        """
         string = ''
         for row in self._grid_display:
             string += row.__str__() + '\n'
