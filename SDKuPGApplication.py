@@ -95,9 +95,9 @@ class SDKuPGApplication:
                     if event.key == pygame.K_r:
                         self._grid.restart()
                         self._update_screen()
-                    # if event.key == pygame.K_u:
-                    #     self._grid.undo_fill()
-                    #     self._update_screen()
+                    if event.key == pygame.K_u:
+                        self._grid.undo_fill()
+                        self._update_screen()
 
                 for row in range(9):
                     for col in range(9):
