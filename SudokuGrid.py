@@ -241,7 +241,6 @@ class SudokuGrid:
         for row in range(9):
             self._grid_display[row] = self._grid_init[row][:]
 
-
     def undo(self):
         if len(self._move_history) == 0:
             return False
@@ -264,7 +263,7 @@ class SudokuGrid:
 #     sudoku_grid.start_game(3)
 #     print(sudoku_grid)
 #     while not sudoku_grid.game_over():
-#         user = input("u for undo, int for row: ")
+#         user = input("u for undo, r for restart, int for row: ")
 #         if user == "u":
 #             sudoku_grid.undo()
 #         elif user == "r":
