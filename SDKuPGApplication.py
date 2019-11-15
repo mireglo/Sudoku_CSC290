@@ -26,10 +26,10 @@ class SDKuPGApplication:
         self._menus = {}
         lst = ["on_game_screen", "on_game_screen"]
         for menu in lst:
-            self._menus[menu] = False
+            self._menus[menu] = True
 
-        # self._menus = {"on_game_screen": False}
-        self._menus["on_main_menu"] = True
+        #self._menus = {"on_game_screen": False}
+        self._menus["on_main_menu"] = False
 
     @staticmethod
     def _draw_background(screen):

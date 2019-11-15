@@ -1,5 +1,5 @@
 import pygame
-
+import GameScreen
 
 class Textbox:
     """ A textbox to allow user input
@@ -18,7 +18,6 @@ class Textbox:
     _text:
         The text that is displayed
     """
-    current_tile = [0, 0]
 
     def __init__(self, x_pos, y_pos, width, height):
         self._colour = (0, 0, 0)
@@ -46,6 +45,12 @@ class Textbox:
         if self._active:
             pygame.draw.rect(screen, (194, 245, 255), self._input_box)
         screen.blit(txt_surface, (self._input_box.x+13, self._input_box.y+2))
+
+    def set_active(self):
+        self._active = True
+
+    def set_deactive(self):
+        self._active = False
 
     def handle_event(self, event):
         # Handles mouse click events
@@ -84,7 +89,8 @@ class Textbox:
     #         elif event.key == pygame.K_a and Textbox.current_tile[1] != 0:
     #             Textbox.current_tile[1] = Textbox.current_tile[1] - 1
     #         print(Textbox.current_tile)
-
+    def is_editable(self):
+        return self._editable
     def handle_int_event(self, event):
         # Handles mouse click events
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -95,10 +101,9 @@ class Textbox:
                 if self._input_box.collidepoint(event.pos):
                     if(0 <= (event.pos[0]-40)//40 <= 8 and 0 <=
                             (event.pos[1]-40)//40 <= 8):
-                        Textbox.current_tile = [(event.pos[0]-40)//40,
+                        GameScreen.set_current_tile = [(event.pos[0]-40)//40,
                                                 (event.pos[1]-40)//40]
                     # Toggle the active variable
-                    print(Textbox.current_tile)
                     self._active = True
                 else:
                     self._active = False
@@ -108,20 +113,8 @@ class Textbox:
                 # Make changes to the text
                 if event.key == pygame.K_BACKSPACE:
                     self._text = self._text[:-1]
-                elif event.key == pygame.K_s and Textbox.current_tile[0] != 8:
-                    Textbox.current_tile[0] = Textbox.current_tile[0] + 1
-                # up arrow
-                elif event.key == pygame.K_w and Textbox.current_tile[0] != 0:
-                    Textbox.current_tile[0] = Textbox.current_tile[0] - 1
-                # right arrow
-                elif event.key == pygame.K_d and Textbox.current_tile[1] != 8:
-                    Textbox.current_tile[1] = Textbox.current_tile[1] + 1
-                # left arrow
-                elif event.key == pygame.K_a and Textbox.current_tile[1] != 0:
-                    Textbox.current_tile[1] = Textbox.current_tile[1] - 1
                 else:
                     if len(self._text) >= 0 \
                             and (event.unicode in
                                  ['1', '2', '3', '4', '5', '6', '7', '8', '9']):
                         self._text = event.unicode
-                print(Textbox.current_tile)

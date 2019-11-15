@@ -13,6 +13,7 @@ class GameScreen:
     _text_grid:
         A grid that keeps track of each textbox
     """
+    current_tile = [0, 0]
 
     def __init__(self, screen):
         """ Initializes the game application
@@ -52,6 +53,16 @@ class GameScreen:
                 else:
                     self._text_grid[row][col].set_text("")
 
+    def deactivate_all(self):
+        for row in range(9):
+            for col in range(9):
+                self._text_grid[row][col].set_deactive()
+
+    def _update_tile(self):
+        self.deactivate_all()
+        if self._text_grid[GameScreen.current_tile[0]][GameScreen.current_tile[1]].is_editable():
+            self._text_grid[GameScreen.current_tile[0]][GameScreen.current_tile[1]].set_active()
+
     def handle_game(self, event):
         """ Handles user inputs
         """
@@ -63,6 +74,23 @@ class GameScreen:
             if event.key == pygame.K_u:
                 self._grid.undo_fill()
                 self._update_screen()
+            if event.key == pygame.K_s and GameScreen.current_tile[0] != 8:
+                GameScreen.current_tile[0] = GameScreen.current_tile[0] + 1
+                self._update_tile()
+                # up arrow
+            if event.key == pygame.K_w and GameScreen.current_tile[0] != 0:
+                GameScreen.current_tile[0] = GameScreen.current_tile[0] - 1
+                self._update_tile()
+
+            # right arrow
+            if event.key == pygame.K_d and GameScreen.current_tile[1] != 8:
+                GameScreen.current_tile[1] = GameScreen.current_tile[1] + 1
+                self._update_tile()
+
+            # left arrow
+            if event.key == pygame.K_a and GameScreen.current_tile[1] != 0:
+                GameScreen.current_tile[1] = GameScreen.current_tile[1] - 1
+                self._update_tile()
 
         for row in range(9):
             for col in range(9):
