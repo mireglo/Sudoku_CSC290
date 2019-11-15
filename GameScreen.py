@@ -1,4 +1,5 @@
 import pygame
+import GridDraw
 from Textbox import*
 from Sudoku import*
 
@@ -71,9 +72,11 @@ class GameScreen:
                     change = 0
                 self._grid.fill(int(change), row, col)
 
-    def draw_grid(self, screen):
-        """ Draws the text boxes
+    def draw_game(self, screen):
+        """ Draws the sudoku game using GridDraw functions
         """
         for sublist in self._text_grid:
             for textbox in sublist:
                 textbox.draw(screen)
+        GridDraw.draw_box()
+        GridDraw.draw_grid()

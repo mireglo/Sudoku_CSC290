@@ -1,5 +1,5 @@
 from GameScreen import*
-import GridDraw
+from MainMenu import*
 import sys
 
 
@@ -22,6 +22,14 @@ class SDKuPGApplication:
         self._rect = pygame.Rect(0, 0, width, height)
         self._screen = pygame.display.set_mode(self._rect.size)
         self._game_screen = GameScreen(self._screen)
+        self._main_menu = MainMenu()
+        self._menus = {}
+        lst = ["on_game_screen", "on_game_screen"]
+        for menu in lst:
+            self._menus[menu] = False
+
+        # self._menus = {"on_game_screen": False}
+        self._menus["on_main_menu"] = True
 
     @staticmethod
     def _draw_background(screen):
@@ -29,13 +37,15 @@ class SDKuPGApplication:
         """
         screen.fill((255, 255, 255))
 
-    @staticmethod
-    def _draw_game(self):
-        """ Draws the sudoku game using GridDraw functions
+    def _change_menu(self, menu):
+        """ Sets all other menus to false, sets given menu to True
         """
-        self._game_screen.draw_grid(self._screen)
-        GridDraw.draw_box()
-        GridDraw.draw_grid()
+        if menu in self._menus:
+            for key in self._menus.keys():
+                if key != menu:
+                    self._menus[key] = False
+                else:
+                    self._menus[key] = True
 
     def launch(self):
         """ Launches the game application
@@ -55,12 +65,23 @@ class SDKuPGApplication:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         running = False
-                self._game_screen.handle_game(event)
+                    if event.key == pygame.K_n:
+                        self._change_menu("on_game_screen")
+                    if event.key == pygame.K_m:
+                        self._change_menu("on_main_menu")
+                if self._menus["on_game_screen"]:
+                    self._game_screen.handle_game(event)
 
             # --- draws ---
 
             self._draw_background(self._screen)
-            self._draw_game(self)
+            if self._menus["on_game_screen"]:
+                self._game_screen.draw_game(self._screen)
+            if self._menus["on_main_menu"]:
+                pygame.mouse.set_visible(0)
+                self._main_menu.draw_ufo(self._screen)
+            else:
+                pygame.mouse.set_visible(1)
             pygame.display.update()
 
             # --- FPS ---
