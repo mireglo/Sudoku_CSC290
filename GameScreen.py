@@ -53,15 +53,15 @@ class GameScreen:
                 else:
                     self._text_grid[row][col].set_text("")
 
-    def deactivate_all(self):
+    def _deactivate_all(self):
         for row in range(9):
             for col in range(9):
-                self._text_grid[row][col].set_deactive()
+                self._text_grid[row][col].set_inactive()
 
     def _update_tile(self):
-        self.deactivate_all()
-        if self._text_grid[GameScreen.current_tile[0]][GameScreen.current_tile[1]].is_editable():
-            self._text_grid[GameScreen.current_tile[0]][GameScreen.current_tile[1]].set_active()
+        self._deactivate_all()
+        # if self._text_grid[GameScreen.current_tile[0]][GameScreen.current_tile[1]].is_editable():
+        self._text_grid[GameScreen.current_tile[0]][GameScreen.current_tile[1]].set_active()
 
     def handle_game(self, event):
         """ Handles user inputs

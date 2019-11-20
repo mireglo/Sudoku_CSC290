@@ -12,7 +12,9 @@ class SDKuPGApplication:
     _screen:
         Where the visuals are displayed
     _game_screen:
-        A GameScreen that draws the game
+        A GameScreen that can draw and handle events for the game
+    _main_menu:
+        A MainMenu that can draw and handle events for the main menu
     """
     def __init__(self, width, height):
         """ Initializes the game application
@@ -26,10 +28,8 @@ class SDKuPGApplication:
         self._menus = {}
         lst = ["on_game_screen", "on_game_screen"]
         for menu in lst:
-            self._menus[menu] = True
-
-        #self._menus = {"on_game_screen": False}
-        self._menus["on_main_menu"] = False
+            self._menus[menu] = False
+        self._menus["on_main_menu"] = True
 
     @staticmethod
     def _draw_background(screen):
