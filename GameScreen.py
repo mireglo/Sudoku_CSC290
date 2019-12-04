@@ -74,21 +74,24 @@ class GameScreen:
             if event.key == pygame.K_u:
                 self._grid.undo_fill()
                 self._update_screen()
-            if event.key == pygame.K_s and GameScreen.current_tile[0] != 8:
+            
+            # down arrow or s key
+            if (event.key == pygame.K_s or event.key == pygame.K_DOWN) and GameScreen.current_tile[0] != 8:
                 GameScreen.current_tile[0] = GameScreen.current_tile[0] + 1
                 self._update_tile()
-                # up arrow
-            if event.key == pygame.K_w and GameScreen.current_tile[0] != 0:
+                
+            # up arrow or w key
+            if (event.key == pygame.K_w or event.key == pygame.K_UP) and GameScreen.current_tile[0] != 0:
                 GameScreen.current_tile[0] = GameScreen.current_tile[0] - 1
                 self._update_tile()
 
-            # right arrow
-            if event.key == pygame.K_d and GameScreen.current_tile[1] != 8:
+            # right arrow or d key
+            if (event.key == pygame.K_d or event.key == pygame.K_RIGHT) and GameScreen.current_tile[1] != 8:
                 GameScreen.current_tile[1] = GameScreen.current_tile[1] + 1
                 self._update_tile()
 
-            # left arrow
-            if event.key == pygame.K_a and GameScreen.current_tile[1] != 0:
+            # left arrow or a key
+            if (event.key == pygame.K_a or event.key == pygame.K_LEFT) and GameScreen.current_tile[1] != 0:
                 GameScreen.current_tile[1] = GameScreen.current_tile[1] - 1
                 self._update_tile()
 
