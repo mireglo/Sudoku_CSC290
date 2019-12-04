@@ -41,6 +41,8 @@ class GameScreen:
                     self._text_grid[row][col].set_text(self._grid.get_cell(row,
                                                                            col))
                     self._text_grid[row][col].set_editable(False)
+                    
+        self._update_tile()
 
     def _update_screen(self):
         """ Updates the view to represent the current state of the board
