@@ -56,6 +56,9 @@ The game will end once the board is completely filled according to the rules, af
 
 ## Contributors
 
+- **Hamzah Shahid**
+    - I created the MainMenu class for our game which allows users to smoothly transition from and to the game screen. I fixed bugs that existed in the SDKuPGApplication.py class too. In addition to this, I am responsible for testing the code to ensure that everything works the way that it should. Furthermore, I created the GameButton.py class which is currently unused. This class will be used for further implementations where someone may wish to add extra functionalities to the sudoku board such as changing the colours of pieces. Within this README file, I was responsible for relaying to potential users how to install our game. Additionally, I explained a portion of our gameplay and added the MIT license.
+
 ## License
 
 MIT License (MIT)
