@@ -53,3 +53,13 @@ The game screen display a 9x9 Sudoku board which will have some cells automatica
 * Click the Main Menu button to return to the main menu. This will not reset the game as the board will stay unchanged.
 
 The game will end once the board is completely filled according to the rules, after which it will proceed to the "game won" screen".
+
+## Contributors
+
+## License
+
+MIT License (MIT)
+
+Copyright © 2019 Steve Group
+
+You can find a copy of the licence at https://mit-license.org/
