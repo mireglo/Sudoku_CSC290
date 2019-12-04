@@ -41,15 +41,15 @@ You have to fill in the rest of the cells while following the rules. To do so us
 
   ![Post-Highlight](https://user-images.githubusercontent.com/29599132/70168678-516a1180-1697-11ea-9b8c-4c34dd4cc296.png)
 
-* To select a cell, click on the cell or move to the cell using the WASD.
+* To select a cell, click on the cell or move to the cell from the current selection using the WASD
   * W moves one cell up
   * S moves one cell down
   * A moves one cell left
   * D moves one cell right
 
-* Press a numeric key (1-9) to make an entry into the board or press BACKSPACE to remove the number from the cell.
+* Press a numeric key (1-9) to make an entry into the board or press BACKSPACE to remove the number from the cell
 
-* Click the ``Main Menu`` button to return to the main menu. This will not reset the game as the board will stay unchanged.
+* Click the ``Main Menu`` button to return to the main menu. This will not reset the game as the board will stay unchanged
 
 The game will end once the board is completely filled according to the rules, after which it will proceed to the "game won screen".
 
