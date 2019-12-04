@@ -24,7 +24,7 @@ class SDKuPGApplication:
         self._rect = pygame.Rect(0, 0, width, height)
         self._screen = pygame.display.set_mode(self._rect.size)
         self._game_screen = GameScreen(self._screen)
-        self._main_menu = MainMenu()
+        self._main_menu = MainMenu(self._screen)
         self._menus = {}
         lst = ["on_game_screen", "on_game_screen"]
         for menu in lst:
@@ -56,6 +56,12 @@ class SDKuPGApplication:
 
         while running:
 
+            # --- mouse events ---
+            if self._main_menu.get_current_screen() == "None":
+                running = False
+            if self._main_menu.get_current_screen() == "Game":
+                self._change_menu("on_game_screen")
+
             # --- events ---
 
             for event in pygame.event.get():
@@ -69,6 +75,7 @@ class SDKuPGApplication:
                         self._change_menu("on_game_screen")
                     if event.key == pygame.K_m:
                         self._change_menu("on_main_menu")
+                        self._main_menu.set_current_screen("Menu")
                 if self._menus["on_game_screen"]:
                     self._game_screen.handle_game(event)
 
@@ -79,7 +86,7 @@ class SDKuPGApplication:
                 self._game_screen.draw_game(self._screen)
             if self._menus["on_main_menu"]:
                 pygame.mouse.set_visible(0)
-                self._main_menu.draw_ufo(self._screen)
+                self._main_menu.launch_menu()
             else:
                 pygame.mouse.set_visible(1)
             pygame.display.update()
