@@ -55,14 +55,16 @@ class MainMenu:
         self._screen.fill((255, 235, 186))
         # Add Play button
         pygame.draw.circle(self._screen, (0, 255, 0), (365, 250), 70, 5)
-        title_font = pygame.font.SysFont('Comic Sans MS', 60)
-        text_surface = title_font.render('Play', True, (0, 255, 0))
-        self._screen.blit(text_surface, (325, 230))
+        title_font = pygame.font.SysFont('Comic Sans MS', 55)
+        text_surface = title_font.render('Play', False, (0, 255, 0))
+        rect = text_surface.get_rect(center=(365, 250))
+        self._screen.blit(text_surface, rect)
         # Add quit button
         pygame.draw.circle(self._screen, (255, 0, 0), (135, 250), 70, 5)
-        title_font = pygame.font.SysFont('Comic Sans MS', 60)
-        text_surface = title_font.render('Quit', True, (255, 0, 0))
-        self._screen.blit(text_surface, (91, 230))
+        title_font = pygame.font.SysFont('Comic Sans MS', 55)
+        text_surface = title_font.render('Quit', False, (255, 0, 0))
+        rect = text_surface.get_rect(center=(135, 250))
+        self._screen.blit(text_surface, rect)
         # Update screen
         pygame.display.update()
 
@@ -72,8 +74,10 @@ class MainMenu:
         """
         # Add game title
         title_font = pygame.font.SysFont('Comic Sans MS', 125)
-        text_surface = title_font.render('SDKuPG', True, (0, 155, 255))
-        self._screen.blit(text_surface, (75, 50))
+        text_surface = title_font.render('SDKuPG', False, (0, 155, 255))
+        rect = text_surface.get_rect(center=(250, 100))
+        self._screen.blit(text_surface, rect)
+        pygame.display.update()
 
     def add_action_listeners(self) -> None:
         """

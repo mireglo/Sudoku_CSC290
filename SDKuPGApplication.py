@@ -93,7 +93,7 @@ class SDKuPGApplication:
 
             # --- FPS ---
 
-            clock.tick(50)
+            clock.tick(25)
 
         pygame.quit()
         sys.exit(0)
