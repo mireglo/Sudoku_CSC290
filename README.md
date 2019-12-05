@@ -1,4 +1,4 @@
-# SDKuPG (Sudoku Puzzle Game)
+﻿# SDKuPG (Sudoku Puzzle Game)
 
 ## Installation
 
@@ -62,6 +62,10 @@ The game will end once the board is completely filled according to the rules, af
     
 - **Arsh Khan**
    - I created the GridDraw module which allows you to draw the grid for the puzzle. I also added the ability to use the arrow keys as a control scheme. Finally I fixed a bug with the game not highlighting the first selected cell. For the README, I added the 'Rules of Sudoku' section. I also fleshed out the 'How to Play' section.
+
+- **Anthony Lee**
+   - I created SudokuApplication and Textbox. The application launches the game and acts as the view. Creating the application involved hooking up the game to the GUI. Additionally, I made the UFO cursor in the menu screen. The textboxes represent an individual cell and can get input. Fixed a bug where using the arrow keys did not highlight a clue cell.
+
 
 ## License
 
