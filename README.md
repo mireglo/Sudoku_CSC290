@@ -63,6 +63,9 @@ The game will end once the board is completely filled according to the rules, af
 - **Arsh Khan**
    - I created the GridDraw module which allows you to draw the grid for the puzzle. I also added the ability to use the arrow keys as a control scheme. Finally I fixed a bug with the game not highlighting the first selected cell. For the README, I added the 'Rules of Sudoku' section. I also fleshed out the 'How to Play' section.
 
+- **Kyle Xiao**
+    - I created the SudokuGrid class for our game. The SudokuGrid class randomly generates the model of a game of sudoku. SudokuGrid also handles the the logic for making moves, undoing moves, and restarting the current puzzle. Proof read and minor edits to README.md. Fixed errors: formatted SudokuGrid to match PEP8, centered elements on the main menu, removed multiple highlighted cells in GameScreen.
+
 ## License
 
 MIT License (MIT)
