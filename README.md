@@ -2,7 +2,9 @@
 
 ## Installation
 
-Install ``Python 3.0`` or greater. From there, run the command ``pip install pygame`` in the shell. Finally, git clone or download the repository and run ``SDKuPGApplication.py`` through an IDE or CLI of choice to run the game.
+If you don't already have ```Python 3.0``` or greater installed, head on over [here](https://www.python.org/downloads/) to install ```Python 3.0``` or greater. From there, run the command ``pip install pygame`` in the shell to install the ``Pygame`` module. Finally, [git clone](https://github.com/mireglo/Sudoku_CSC290) or [download](https://github.com/mireglo/Sudoku_CSC290) the repository and run the file ``SDKuPGApplication.py`` through an IDE or CLI of choice to play the game.
+
+##### To clone, paste this into your shell: ``git clone https://github.com/mireglo/Sudoku_CSC290.git``
 
 ## Rules of Sudoku
 
