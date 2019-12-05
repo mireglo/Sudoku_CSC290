@@ -57,6 +57,9 @@ The game will end once the board is completely filled according to the rules, af
 
 - **Hamzah Shahid**
     - I created the MainMenu class for our game which allows users to smoothly transition from and to the game screen. I fixed bugs that existed in the SDKuPGApplication.py class too. In addition to this, I am responsible for testing the code to ensure that everything works the way that it should. Furthermore, I created the GameButton.py class which is currently unused. This class will be used for further implementations where someone may wish to add extra functionalities to the sudoku board such as changing the colours of pieces. Within this README file, I was responsible for relaying to potential users how to install our game. Additionally, I explained a portion of our gameplay and added the MIT license.
+    
+- **Arsh Khan**
+   - I created the GridDraw module which allows you to draw the grid for the puzzle. I also added the ability to use the arrow keys as a control scheme. Finally I fixed a bug with the game not highlighting the first selected cell. For the README, I added the 'Rules of Sudoku' section. I also fleshed out the 'How to Play' section.
 
 ## License
 
