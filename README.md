@@ -66,6 +66,12 @@ The game will end once the board is completely filled according to the rules, af
 - **Anthony Lee**
    - I created SudokuApplication and Textbox. The application launches the game and acts as the view. Creating the application involved hooking up the game to the GUI. Additionally, I made the UFO cursor in the menu screen. The textboxes represent an individual cell and can get input. Fixed a bug where using the arrow keys did not highlight a clue cell.
 
+- **Kyle Xiao**
+    - I created the SudokuGrid class for our game. The SudokuGrid class randomly generates the model of a game of sudoku. SudokuGrid also handles the the logic for making moves, undoing moves, and restarting the current puzzle. Proof read and minor edits to README.md. Fixed errors: formatted SudokuGrid to match PEP8, centered elements on the main menu, removed multiple highlighted cells in GameScreen.
+
+- **Puneet Sandhu**
+   - I created Sudoku.py to create a pathway for the view and model to interact. I implemented the class InputHandler.py which is currently unused. I added the navigation of the game board using both the mouse and keyboard (WASD Keys) as well as fixing the implementation of selected cells in the class GameScreen.py.
+
 
 ## License
 
