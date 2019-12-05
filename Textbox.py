@@ -93,6 +93,8 @@ class Textbox:
                     self._active = True
                 else:
                     self._active = False
+            else:
+                self._active = False
         # Handles keyboard events
         if event.type == pygame.KEYDOWN:
             if self._editable:
