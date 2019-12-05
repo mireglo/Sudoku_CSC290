@@ -96,14 +96,12 @@ class Textbox:
             else:
                 self._active = False
         # Handles keyboard events
-        if event.type == pygame.KEYDOWN:
-            if self._editable:
-                if self._active:
-                    # Make changes to the text
-                    if event.key == pygame.K_BACKSPACE:
-                        self._text = self._text[:-1]
-                    else:
-                        if len(self._text) >= 0 \
-                                and (event.unicode in
-                                     ['1', '2', '3', '4', '5', '6', '7', '8', '9']):
-                            self._text = event.unicode
+        if event.type == pygame.KEYDOWN and self._editable and self._active:
+            # Make changes to the text
+            if event.key == pygame.K_BACKSPACE:
+                self._text = self._text[:-1]
+            else:
+                if len(self._text) >= 0 \
+                        and (event.unicode in
+                             ['1', '2', '3', '4', '5', '6', '7', '8', '9']):
+                    self._text = event.unicode
